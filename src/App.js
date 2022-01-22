@@ -2,11 +2,14 @@ import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link,useHistory } from 'react-router-dom';
 
-function App() {
+
+const App=()=>{
     return (
-      <div></div>
-      
+      <div>
+      <Link to="/login">login</Link>
+      </div>
     );
-  }
+}
+  
   
   export default App;

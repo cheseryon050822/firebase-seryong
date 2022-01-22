@@ -8,13 +8,21 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-
+import Login from './pages/Login';
+import Main from './pages/Main';
+import CreateUser from './pages/CreateUser';
 ReactDOM.render(
   <React.StrictMode>
      <Router>
       <Routes>
-      <Route>
-      </Route>
+       <Route exact path="/"element={<App />}>
+        </Route>
+       <Route exact path="/login"element={<Login />}>
+       </Route>
+       <Route exact path="/main"element={<Main />}>
+       </Route>
+       <Route exact path="/createuser"element={<CreateUser />}>
+       </Route>
       </Routes>
     </Router>
   </React.StrictMode>,
