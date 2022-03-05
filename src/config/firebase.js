@@ -16,3 +16,17 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+export const createuser = (email,password) =>{
+  const auth=getAuth();
+  auth.createUserWithEmailAndPassword(auth,email,password)
+.then((userCredentail)=>{
+  const user = userCredentail.user;
+  console.log(user)
+  console.log("create user success!!")
+  return "success"
+})
+.catch((error)=>{
+  console.log(error.message)
+  return "failed"
+});
+}
