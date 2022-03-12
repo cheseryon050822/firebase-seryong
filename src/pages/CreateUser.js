@@ -2,15 +2,16 @@ import React,{useState} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Link, useNavigate} from 'react-router-dom';
 import { TextField,Button } from "@material-ui/core";
+import { createUser } from "../config/firebase";
 
 const CreateUser=()=>{
 const [email,setEmail]=useState('')
 const [password,setPassword]=useState('')
 const [error,setError]=useState('')
-let navigate = useNavigate()
+const navigate = useNavigate()
 
 const handleClick = async() =>{
-    const result =await CreateUser(email,password)
+    const result =await createUser(email,password)
     console.log("~file:CreateUser.js ~ line 13 ~ handleClick ~ result",result)
      if (result){
          navigate("/main")
@@ -30,7 +31,7 @@ const handleClick = async() =>{
     <div>
     <TextField id="email" label="email" value={email} onChange={e=>setEmail(e.target.value)}></TextField><br/>
     <TextField id="password" label="password" value={password} onChange={e=>setPassword(e.target.value)}></TextField><br/>
-    <button onClick={handleClick}>新井が悪い</button>
+    <Button onClick={handleClick}>古木あーっと！</Button>
     </div>
 </div>
  );   
