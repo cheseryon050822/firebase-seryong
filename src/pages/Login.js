@@ -10,6 +10,7 @@ const [password,setPassword]=useState('')
 const [error,setError]=useState('')
 const navigate = useNavigate()
 
+const handleClick=()=>{
 const auth = getAuth();
 signInWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
@@ -23,7 +24,7 @@ signInWithEmailAndPassword(auth, email, password)
     console.log(errorCode)
     console.log(errorMessage)
   });
-
+}
  return(
 <div>
     <h1>Hello</h1>  
@@ -36,7 +37,7 @@ signInWithEmailAndPassword(auth, email, password)
     <div>
     <TextField id="email" label="email" value={email} onChange={e=>setEmail(e.target.value)}></TextField><br/>
     <TextField id="password" label="password" value={password} onChange={e=>setPassword(e.target.value)}></TextField><br/>
-    <Button onClick={auth}>古木あーっと！</Button>
+    <Button onClick={handleClick}>古木あーっと！</Button>
     </div>
 </div>
  );   
