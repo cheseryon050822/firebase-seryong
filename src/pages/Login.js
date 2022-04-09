@@ -1,7 +1,7 @@
 import React,{useState} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Link,useNavigate} from 'react-router-dom';
-import { getAuth, signInWithEmailAndPassword} from "firebase/auth";
+import { Link,useNavigate,useLocation} from 'react-router-dom';
+import { getAuth, signInWithPopup, GoogleAuthProvider} from "firebase/auth";
 import { TextField,Button } from "@material-ui/core";
 
 const Login=()=>{
@@ -9,20 +9,31 @@ const [email,setEmail]=useState('')
 const [password,setPassword]=useState('')
 const [error,setError]=useState('')
 const navigate = useNavigate()
-
+const provider = new GoogleAuthProvider();
+const Location = useLocation();
+  
 const handleClick=()=>{
 const auth = getAuth();
-signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in
-    const user = userCredential.user;
+auth.languageCode = 'it';
+signInWithPopup(auth, provider)
+  .then((result) => {
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential.accessToken;
+    // The signed-in user info.
+    const user = result.user;
     // ...
-  })
-  .catch((error) => {
+    Location.push('/main');
+    
+  }).catch((error) => {
+    // Handle Errors here.
     const errorCode = error.code;
     const errorMessage = error.message;
-    console.log(errorCode)
-    console.log(errorMessage)
+    // The email of the user's account used.
+    const email = error.email;
+    // The AuthCredential type that was used.
+    const credential = GoogleAuthProvider.credentialFromError(error);
+    // ...
   });
 }
  return(
@@ -37,7 +48,7 @@ signInWithEmailAndPassword(auth, email, password)
     <div>
     <TextField id="email" label="email" value={email} onChange={e=>setEmail(e.target.value)}></TextField><br/>
     <TextField id="password" label="password" value={password} onChange={e=>setPassword(e.target.value)}></TextField><br/>
-    <Button onClick={handleClick}>古木あーっと！</Button>
+    <Button onClick={handleClick}>阪神最下位</Button>
     </div>
 </div>
  );   
