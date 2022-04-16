@@ -48,7 +48,7 @@ signInWithPopup(auth, provider)
     <div>
     <TextField id="email" label="email" value={email} onChange={e=>setEmail(e.target.value)}></TextField><br/>
     <TextField id="password" label="password" value={password} onChange={e=>setPassword(e.target.value)}></TextField><br/>
-    <Button onClick={handleClick}>阪神最下位</Button>
+    <Button onClick={handleClick}>破竹の二連勝</Button>
     </div>
 </div>
  );   
