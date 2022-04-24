@@ -1,6 +1,7 @@
 
 import { getApps,initializeApp } from "firebase/app";
 import {getAuth,createUserWithEmailAndPassword} from 'firebase/auth';
+import { getFirestore, addDoc,collection,getDocs,query, doc, updateDoc } from "firebase/firestore"
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -29,4 +30,38 @@ export const createUser = (email,password) =>{
   console.log(error.message)
   return "failed"
 });
+}
+
+export const db =getFirestore();
+
+export const createDataInFirebase = async () =>{
+  let returnObj =""
+  console.log('firebase start')
+  try {
+    const docRef =await addDoc(collection(db,"users"),{
+      first:"AdaAda",
+      last:"Lovelace",
+      born:1815
+    })
+    returnObj="test1"
+    console.log("Document written with ID:",docRef.id)
+  }catch(e){
+    returnObj="test2"
+    console.error("Error adding document:",e)
+  }
+  return returnObj
+}
+export const readData =async ()=>{
+console.log('readData')
+const q = query(collection(db,"users"));
+const  querySnapshot =await getDocs(q);
+querySnapshot.forEach((doc)=>{
+  console.log(doc.id,"=>",doc.data());
+});
+};
+export const updateData =async ()=>{
+  const washingtonref=doc(db,"users","Iz4bjvywlBQ0fLAJ2TGa");
+  await updateDoc(washingtonref,{
+    capital:true
+  })
 }
