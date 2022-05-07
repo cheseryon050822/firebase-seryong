@@ -1,7 +1,9 @@
 
+import { async } from "@firebase/util";
 import { getApps,initializeApp } from "firebase/app";
 import {getAuth,createUserWithEmailAndPassword} from 'firebase/auth';
-import { getFirestore, addDoc,collection,getDocs,query, doc, updateDoc } from "firebase/firestore"
+import { getFirestore, addDoc,collection,getDocs,query, doc, updateDoc, 
+  deleteField,deleteDoc,setDoc} from "firebase/firestore"
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -60,8 +62,25 @@ querySnapshot.forEach((doc)=>{
 });
 };
 export const updateData =async ()=>{
-  const washingtonref=doc(db,"users","Iz4bjvywlBQ0fLAJ2TGa");
+  const washingtonref=doc(db,"users","Iz4bjvywlBQ0fLAJ2TGa"); 
   await updateDoc(washingtonref,{
     capital:true
   })
+}
+
+export const deleteData =async ()=>{
+  const cityRef = doc(db,"users","Iz4bjvywlBQ0fLAJ2TGa");
+  await deleteDoc(cityRef, {
+      capital: deleteField()
+  });
+  }
+
+export const newData =async(First,Last,Born)=>{
+  const townRef = doc(db, 'cities');
+  setDoc(townRef, { capital: true }, { merge: true });
+  await setDoc(doc(db, "cities"), {
+    First,
+    Last,
+    Born
+  });
 }
