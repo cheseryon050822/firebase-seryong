@@ -3,7 +3,7 @@ import { async } from "@firebase/util";
 import { getApps,initializeApp } from "firebase/app";
 import {getAuth,createUserWithEmailAndPassword} from 'firebase/auth';
 import { getFirestore, addDoc,collection,getDocs,query, doc, updateDoc, 
-  deleteField,deleteDoc,setDoc} from "firebase/firestore"
+  deleteField,deleteDoc,setDoc,originalDoc} from "firebase/firestore"
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -62,14 +62,14 @@ querySnapshot.forEach((doc)=>{
 });
 };
 export const updateData =async ()=>{
-  const washingtonref=doc(db,"users","Iz4bjvywlBQ0fLAJ2TGa"); 
+  const washingtonref=doc(db,"users","0mq4nOvGLCNHCvwsHK58"); 
   await updateDoc(washingtonref,{
     capital:true
   })
 }
 
 export const deleteData =async ()=>{
-  const cityRef = doc(db,"users","Iz4bjvywlBQ0fLAJ2TGa");
+  const cityRef = doc(db,"users","0mq4nOvGLCNHCvwsHK58");
   await deleteDoc(cityRef, {
       capital: deleteField()
   });
@@ -84,3 +84,16 @@ export const newData =async(First,Last,Born)=>{
     Born
   });
 }
+export const  originalData=async (First,Last,Born)=>{
+  const newCountriesRef = doc(collection(db, "countries"));
+
+  // later...
+  await setDoc(newCountriesRef, {
+    First,
+    Last,
+    Born
+  });
+
+   
+  }
+    
