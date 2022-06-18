@@ -86,14 +86,12 @@ export const newData =async(First,Last,Born)=>{
 }
 export const  originalData=async (First,Last,Born)=>{
   const newCountriesRef = doc(collection(db, "countries"));
-
-  // later...
   await setDoc(newCountriesRef, {
     First,
     Last,
-    Born
+    Born,
   });
-
+  
    
   }
     

@@ -47,11 +47,13 @@ const Main=()=>{
       <Button variant="outlined" onClick={newmade}>MY DATA CREATE</Button>
       <Link to="/login">login</Link>
     </div>
+    
     <div>
     <TextField id="first" label="first" value={first} onChange={e=>setFirst(e.target.value)}></TextField><br/>
     <TextField id="last" label="last" value={last} onChange={e=>setLast(e.target.value)}></TextField><br/>
     <TextField id="born" label="born" value={born} onChange={e=>setBorn(e.target.value)}></TextField><br/>
     </div>
+    
 </div>
  );   
 }
